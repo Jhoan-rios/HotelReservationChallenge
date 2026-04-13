@@ -31,10 +31,26 @@ class Reservation:
     guests: list[Guest] = field(default_factory=list)
     id: str = field(default_factory=generate_unique_id)
 
-    def add_guest(self):
-        pass
+    def add_guest(self, name: str, email: str, type_: str = Guest.REGULAR):
+        guest = Guest(name=name, email=email, type_=type_)
+        self.guests.append(guest)
 
+    def delete_guest(self, guest_index: int):
+        if 0 <= guest_index < len(self.guests):
+            del self.guests[guest_index]
+        else:
+            guest_not_found_error()
 
+    def __len__(self):
+        return (self.check_out - self.check_in).days
+
+    def __str__(self):
+        return (
+            f"ID: {self.id}\n"
+            f"Guest: {self.guest_name}\n"
+            f"Description: {self.description}\n"
+            f"Dates: {self.check_in} - {self.check_out}"
+        )
 
 
 # TODO: Implement Room class here
