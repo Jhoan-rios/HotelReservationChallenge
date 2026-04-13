@@ -69,8 +69,19 @@ class Room:
             dia_actual = today + timedelta(days=i)
             self.availability[dia_actual] = None
 
-    def book(self, reservation_id:str, check_in: date, check_out: date):
-        pass
+    def book(self, reservation_id: str, check_in: date, check_out: date):
+        current_day = check_in
+
+        while current_day < check_out:
+            if self.availability.get(current_day) is not None:
+                room_not_available_error()
+            current_day += timedelta(days=1)
+
+        current_day = check_in
+
+        while current_day < check_out:
+            self.availability[current_day] = reservation_id
+            current_day += timedelta(days=1)
 
     def release(self, reservation_id: str):
         released = False
