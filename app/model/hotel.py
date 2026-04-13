@@ -58,3 +58,14 @@ class Reservation:
 
 # TODO: Implement Hotel class here
 
+class Hotel:
+    def __init__(self):
+      self.rooms: dict[str, Reservation] = {}
+      self.guests: dict[str, list[Guest]] = {}
+
+    def add_room(self, number: int, type_: str, price_per_night: float):
+        if number in self.rooms:
+            raise room_already_exists_error()
+        else:
+            self.rooms[number] = Room(number, type_, price_per_night)
+
