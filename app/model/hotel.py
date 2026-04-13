@@ -39,6 +39,23 @@ class Reservation:
 
 # TODO: Implement Room class here
 
+    class Room:
+        def __init__(self, number: int, type_: str, price_per_night):
+            self.number: int = number
+            self.type_: str = type_
+            self.price_per_night: float = price_per_night
+            self.available: dict[date, str | None] = {}
+
+        def _init_availability(self):
+            today = datetime.now().date()
+
+            for i in range(365):
+                dia_actual = today + timedelta(days=i)
+                self.available[dia_actual] = None
+
+        def book(self, reservation_id:str, check_in: date, check_out: date):
+            pass
 
 # TODO: Implement Hotel class here
+
 
