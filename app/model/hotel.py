@@ -11,6 +11,16 @@ from app.services.util import (generate_unique_id, date_lower_than_today_error,
 
 
 # TODO: Implement Reservation class here
+@dataclass
+class Reservation:
+    guest_name: str
+    description: str
+    check_in: date
+    check_out: date
+    guests: list[Guest] = field(default_factory=list)
+    id: str = field(default_factory=generate_unique_id)
+
+
 
 
 # TODO: Implement Room class here
