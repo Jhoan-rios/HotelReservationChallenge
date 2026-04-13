@@ -20,6 +20,9 @@ class Reservation:
     guests: list[Guest] = field(default_factory=list)
     id: str = field(default_factory=generate_unique_id)
 
+    def add_guest(self):
+        pass
+
 
 
 
