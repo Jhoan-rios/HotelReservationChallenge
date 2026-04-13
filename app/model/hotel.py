@@ -72,6 +72,28 @@ class Room:
     def book(self, reservation_id:str, check_in: date, check_out: date):
         pass
 
+    def release(self, reservation_id: str):
+        released = False
+        for d, saved_id in self.availability.items():
+            if saved_id == reservation_id:
+                self.availability[d] = None
+                released = True
+        if not released:
+            reservation_not_found_error()
+
+    def update_booking(self, reservation_id: str, check_in: date, check_out: date):
+        for d in self.availability:
+            if self.availability[d] == reservation_id:
+                self.availability[d] = None
+
+        current = check_in
+        while current < check_out:
+            if self.availability.get(current) is not None:
+                room_not_available_error()
+            else:
+                self.availability[current] = reservation_id
+            current += timedelta(days=1)
+
 
 # TODO: Implement Hotel class here
 class Hotel:
